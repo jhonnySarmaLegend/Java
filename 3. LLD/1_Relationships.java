@@ -113,3 +113,15 @@ public class Main {
         author.writeBook(printer); // Author uses Printer to print
     }
 }
+
+
+
+
+/*
+
+Relationship              Meaning                  Example
+is-a            Inheritance/Implementation      Dog extends Animal
+has-a             Composition/Aggregation        Car has Engine  (Aggregation - low coupling - car and driver ,   Composition - tight coupling - car and engine)
+uses-a          Association/Dependency          Author uses Printer
+
+*/
