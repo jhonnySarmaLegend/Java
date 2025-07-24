@@ -1,0 +1,36 @@
+Detailed Explanation
+
+1. Atomicity
+
+All steps in a transaction succeed, or none do.
+Example: Transferring money between bank accounts—if the debit from account A works but the credit to account B fails, the entire operation is rolled back.
+
+
+2. Consistency
+
+The database starts and ends in a consistent state.
+All rules (such as unique constraints, foreign keys, or business logic) must be enforced.
+Example: If a column requires unique emails, a transaction that would create a duplicate is aborted.
+
+
+3. Isolation
+
+Transactions are securely separated until completed.
+Intermediate/partial results of a transaction are not visible to other transactions.
+Example: If two users attempt to book the same seat at the same time, the isolation property ensures one user’s transaction is not affected by the other.
+
+
+4. Durability
+
+Completed transactions survive power failures, crashes, or errors.
+Once you get a commit confirmation, the database guarantees the data is safe.
+Example: After booking a ticket and seeing a confirmation, that booking persists even if the server crashes right after.
+
+
+In Summary
+
+Atomicity: All or nothing
+Consistency: Valid state before and after
+Isolation: No partial interference
+Durability: Data survives failures
+ACID properties are the foundation of reliable transactions in database systems—especially crucial for financial, business, and mission-critical applications.
