@@ -27,10 +27,71 @@ Once you get a commit confirmation, the database guarantees the data is safe.
 Example: After booking a ticket and seeing a confirmation, that booking persists even if the server crashes right after.
 
 
-In Summary
+Key Takeaways
 
-Atomicity: All or nothing
-Consistency: Valid state before and after
-Isolation: No partial interference
-Durability: Data survives failures
+Atomicity: Ensures all or nothing—no partial execution.
+Consistency: Ensures data validity before and after transactions.
+Isolation: Protects transactions from each other during concurrent execution.
+Durability: Ensures permanent persistence of committed transactions.
+
 ACID properties are the foundation of reliable transactions in database systems—especially crucial for financial, business, and mission-critical applications.
+
+
+
+
+TRANSACTIONS-->
+
+1. COMMIT
+
+Purpose: Saves the changes made by the transaction permanently.
+Use Case: Once satisfied with the changes, use COMMIT to finalize them.
+
+Example:
+BEGIN TRANSACTION;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT; -- Both updates are permanently saved.
+
+
+2. ROLLBACK
+Purpose: Cancels the changes made by the transaction, reverting the database to its previous state.
+Use Case: If something goes wrong, use ROLLBACK to undo the changes.
+
+Example:
+BEGIN TRANSACTION;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+ROLLBACK; -- Both updates are undone.
+
+
+3. SAVEPOINT
+Purpose: Creates a named checkpoint within a transaction, allowing partial rollback to that point.
+Use Case: Useful for complex transactions where you may want to undo only part of the changes.
+
+Example:
+BEGIN TRANSACTION;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+SAVEPOINT SP1; -- Creates a savepoint
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+ROLLBACK TO SP1; -- Undoes changes after SP1
+COMMIT; -- Only the first update is saved.
+
+
+
+
+
+REAL WORLD ANALOGY-->
+
+Scenario: Bank Transfer with Savepoints
+
+BEGIN TRANSACTION;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1; -- Debit Account A
+SAVEPOINT DEBIT_DONE;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2; -- Credit Account B
+SAVEPOINT CREDIT_DONE;
+-- Check for errors (e.g., insufficient balance)
+IF (SELECT balance FROM accounts WHERE id = 1) < 0 THEN
+    ROLLBACK TO DEBIT_DONE; -- Undo debit if balance is negative
+ELSE
+    COMMIT; -- Save both changes
+END IF;
