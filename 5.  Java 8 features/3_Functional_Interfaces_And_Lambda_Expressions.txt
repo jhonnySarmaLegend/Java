@@ -1,0 +1,135 @@
+In **Java**, functional interfaces and lambda expressions are key features introduced in **Java 8** that enable **functional programming** paradigms. Together, they make the code more concise, readable, and expressive. Here's a detailed explanation of both concepts, along with examples:
+
+---
+
+## **Functional Interfaces**
+
+### **What is a Functional Interface?**
+
+- A **functional interface** is an interface with **exactly one abstract method** (SAM: Single Abstract Method).
+- It can have **default** or **static** methods but only **one abstract method**.
+- Functional interfaces are the foundation of lambda expressions.
+
+### **Examples of Built-in Functional Interfaces:**
+
+Java provides several functional interfaces in the `java.util.function` package. Some common ones are:
+
+| Interface          | Abstract Method           | Purpose                                  |
+|--------------------|---------------------------|------------------------------------------|
+| `Predicate<T>`    | `boolean test(T t)`        | Represents a boolean-valued function     |
+| `Function<T, R>`  | `R apply(T t)`            | Maps an input to an output               |
+| `Consumer<T>`     | `void accept(T t)`        | Performs an operation on an input        |
+| `Supplier<T>`     | `T get()`                 | Supplies a value                         |
+| `Runnable`        | `void run()`              | Represents a task                        |
+
+### **Custom Functional Interface Example:**
+
+```java
+@FunctionalInterface
+interface MyFunctionalInterface {
+    void doWork(); // Single abstract method
+}
+```
+
+---
+
+## **Lambda Expressions**
+
+### **What is a Lambda Expression?**
+
+- A **lambda expression** is a concise way to represent an **anonymous function** (a function without a name).
+- It simplifies the syntax of functional interfaces by avoiding boilerplate code.
+
+### **Syntax of Lambda Expressions:**
+
+```java
+(parameters) -> expression
+```
+
+or
+
+```java
+(parameters) -> { statements; }
+```
+
+### **Key Features:**
+
+1. **Parameters:** The input parameters (optional parentheses for single parameter).
+2. **Arrow (`->`):** Separates parameters from the body.
+3. **Body:** The logic to be executed (single expression or block).
+
+---
+
+## **Examples of Lambda Expressions**
+
+### **1. Runnable Interface (No Parameters)**
+```java
+Runnable r = () -> System.out.println("Hello World");
+r.run(); // Output: Hello World
+```
+
+---
+
+### **2. Predicate Interface (One Parameter)**
+```java
+Predicate<Integer> isEven = n -> n % 2 == 0;
+System.out.println(isEven.test(10)); // Output: true
+```
+
+---
+
+### **3. Consumer Interface (One Parameter)**
+```java
+Consumer<String> print = s -> System.out.println(s);
+print.accept("Hello"); // Output: Hello
+```
+
+---
+
+### **4. Function Interface (One Input, One Output)**
+```java
+Function<Integer, Integer> square = x -> x * x;
+System.out.println(square.apply(5)); // Output: 25
+```
+
+---
+
+### **5. Supplier Interface (No Input, Returns a Value)**
+```java
+Supplier<String> greet = () -> "Hello";
+System.out.println(greet.get()); // Output: Hello
+```
+
+---
+
+### **Combining Lambda Expressions with Streams**
+
+```java
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+names.stream()
+     .filter(name -> name.startsWith("A"))
+     .forEach(name -> System.out.println(name)); // Output: Alice
+```
+
+---
+
+## **Benefits of Functional Interfaces and Lambda Expressions**
+
+1. **Concise Code:** Reduces boilerplate code by eliminating the need for anonymous inner classes.
+2. **Functional Programming:** Enables programming in a functional style (e.g., map, filter, reduce).
+3. **Readability:** Makes code more expressive and easier to understand.
+4. **Reusability:** Encourages modular and reusable code.
+
+---
+
+## **Key Points**
+
+| Concept                     | Description                                 | Example                                     |
+|-----------------------------|---------------------------------------------|---------------------------------------------|
+| Functional Interface        | Interface with **one abstract method**      | `@FunctionalInterface interface MyInterface { void doWork(); }` |
+| Lambda Expression           | Concise anonymous function                  | `(x) -> x * x`                              |
+| Built-in Functional Interfaces | `Predicate`, `Function`, `Consumer`, `Supplier`, etc. | `Predicate<Integer> isEven = n -> n % 2 == 0;` |
+
+---
+
+Functional interfaces and lambda expressions are **essential** for modern Java development, especially when working with **Streams API** and **method references**. Let me know if you need further examples or explanations!
