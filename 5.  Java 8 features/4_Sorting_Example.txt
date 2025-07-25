@@ -1,0 +1,116 @@
+Here’s an example of using **Comparator** with lambda expressions in Java to **sort a list of objects**. In this example, 
+we’ll sort a list of `Person` objects based on their `age` and `name`.
+
+---
+
+### **Step 1: Define the `Person` Class**
+
+```java
+class Person {
+    private String name;
+    private int age;
+
+    // Constructor
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public String toString() {
+        return name + " (" + age + ")";
+    }
+}
+```
+
+---
+
+### **Step 2: Sort Using Comparator**
+
+#### **1. Sort by Age (Ascending)**
+```java
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        List<Person> people = new ArrayList<>();
+        people.add(new Person("Alice", 25));
+        people.add(new Person("Bob", 30));
+        people.add(new Person("Charlie", 20));
+
+        // Sort by age using lambda expression
+        people.sort((p1, p2) -> p1.getAge() - p2.getAge());
+
+        System.out.println(people);
+        // Output: [Charlie (20), Alice (25), Bob (30)]
+    }
+}
+```
+
+---
+
+#### **2. Sort by Name (Ascending)**
+```java
+// Sort by name using lambda expression
+people.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
+
+System.out.println(people);
+// Output: [Alice (25), Bob (30), Charlie (20)]
+```
+
+---
+
+#### **3. Sort by Age (Descending)**
+```java
+// Sort by age in descending order using lambda expression
+people.sort((p1, p2) -> p2.getAge() - p1.getAge());
+
+System.out.println(people);
+// Output: [Bob (30), Alice (25), Charlie (20)]
+```
+
+---
+
+#### **4. Sort by Name (Descending)**
+```java
+// Sort by name in descending order using lambda expression
+people.sort((p1, p2) -> p2.getName().compareTo(p1.getName()));
+
+System.out.println(people);
+// Output: [Charlie (20), Bob (30), Alice (25)]
+```
+
+---
+
+#### **5. Sort by Age and Then by Name**
+```java
+// Sort by age and then by name using Comparator chaining
+people.sort(Comparator.comparingInt(Person::getAge)
+                      .thenComparing(Person::getName));
+
+System.out.println(people);
+// Output: [Charlie (20), Alice (25), Bob (30)]
+```
+
+---
+
+### **Key Takeaways**
+
+1. **Comparator** allows you to define custom sorting logic.
+2. **Lambda expressions** make the syntax concise and readable.
+3. Use `Comparator.comparing` and `thenComparing` for **chaining multiple sorting criteria**.
+
+---
+
+Let me know if you need further examples or explanations!
