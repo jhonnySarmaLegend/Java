@@ -1,0 +1,148 @@
+Java 8 introduced a **major set of features and language improvements** to the Java platform, making the language more modern, 
+expressive, and functional. Here’s a comprehensive overview of the most important **Java 8 features**, along with their purpose and example usage:
+
+---
+
+## **1. Lambda Expressions**
+
+- **What:** Enables you to write anonymous methods (functions) concisely.
+- **Why:** Makes code shorter, especially for functional interfaces (e.g., event handling, collections).
+- **Example:**
+  ```java
+  // Before Java 8
+  Runnable r1 = new Runnable() {
+      public void run() {
+          System.out.println("Hello");
+      }
+  };
+
+  // Java 8 Lambda
+  Runnable r2 = () -> System.out.println("Hello");
+  ```
+
+---
+
+## **2. Functional Interfaces**
+
+- **What:** Interfaces with a single abstract method, used as lambda targets.
+- **Why:** Foundation of lambda expressions and functional programming in Java.
+- **Common Ones:** Runnable, Callable, Comparator, `java.util.function` package (Predicate, Function, Consumer, Supplier).
+- **Example:**
+  ```java
+  @FunctionalInterface
+  interface MyFunctional {
+      void doWork();
+  }
+  ```
+
+---
+
+## **3. Streams API**
+
+- **What:** Allows you to process sequences of elements (collections, arrays) in a functional style.
+- **Why:** Enables powerful data processing (filter, map, reduce, sort, etc.) with easy parallelism and less boilerplate.
+- **Example:**
+  ```java
+  List<String> words = Arrays.asList("apple", "banana", "cherry");
+  words.stream()
+       .filter(w -> w.startsWith("b"))
+       .forEach(System.out::println); // Output: banana
+  ```
+
+---
+
+## **4. Default & Static Methods in Interfaces**
+
+- **What:** Interfaces can have concrete (default or static) methods.
+- **Why:** Supports backward compatibility and code reusability without breaking legacy implementations.
+- **Example:**
+  ```java
+  interface MyInterface {
+      default void show() { System.out.println("Default!"); }
+      static void greet() { System.out.println("Hello!"); }
+  }
+  ```
+
+---
+
+## **5. Method References**
+
+- **What:** Shorthand notation for calling a method by name instead of using a lambda.
+- **Why:** Further reduces verbosity in functional programming.
+- **Example:**
+  ```java
+  // Instead of (str) -> System.out.println(str),
+  List<String> list = Arrays.asList("A", "B");
+  list.forEach(System.out::println);
+  ```
+
+---
+
+## **6. Optional Class**
+
+- **What:** A container object to represent the presence or absence of a value.
+- **Why:** Avoids null pointer exceptions and improves code readability.
+- **Example:**
+  ```java
+  Optional<String> name = Optional.ofNullable(getName());
+  name.ifPresent(System.out::println); // Prints if not null
+  ```
+
+---
+
+## **7. New Date and Time API (java.time package)**
+
+- **What:** Modern replacement for old Date/Calendar classes. Immutable, thread-safe, clear API.
+- **Why:** Easier date and time handling.
+- **Example:**
+  ```java
+  LocalDate today = LocalDate.now();
+  LocalDate tomorrow = today.plusDays(1);
+  ```
+
+---
+
+## **8. Nashorn JavaScript Engine**
+
+- **What:** Integrates Java and JavaScript, supports running JS on the JVM.
+- **Why:** Useful for scripting and dynamic features.
+
+---
+
+## **9. Repeatable Annotations**
+
+- **What:** You can apply the same annotation multiple times to a class, method, etc.
+- **Why:** Improves flexibility in annotation usage.
+- **Example:**
+  ```java
+  @Hint("A")
+  @Hint("B")
+  class Example { }
+  ```
+
+---
+
+## **10. Type Annotations & Improved Type Inference**
+
+- **What:** Annotations can be used wherever a type is used, and type inference is better (e.g., with generic constructors).
+
+---
+
+## **Summary Table**
+
+| Feature                  | What It Solves                                  |
+|--------------------------|-------------------------------------------------|
+| Lambda expressions       | Concise anonymous function/code blocks           |
+| Functional interfaces    | Enable lambdas/functional programming           |
+| Streams API              | Functional-style collection processing          |
+| Default & static methods | Add methods to interfaces without breaking code |
+| Method references        | More concise functional code                    |
+| Optional                 | Null safety                                     |
+| Date/Time API            | Modern date/time operations                     |
+| Nashorn                  | Run JavaScript on JVM                           |
+| Repeatable Annotations   | Use same annotation multiple times              |
+| Type Annotations         | More powerful annotations and inference         |
+
+---
+
+**Java 8** made Java much more expressive, concise, and functional—bringing it closer to languages like Python and C#. Let me know if you need code samples for any specific feature or further details!
