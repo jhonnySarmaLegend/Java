@@ -1,0 +1,146 @@
+Java introduced **default** and **static methods** in interfaces starting from **Java 8** to enhance the flexibility and 
+functionality of interfaces. This allows interfaces to evolve over time without breaking existing implementations. Here’s a 
+detailed explanation of both features, along with examples:
+
+---
+
+## **Default Methods in Interfaces**
+
+### **1. What is a Default Method?**
+- A **default method** is a method in an interface that has a default implementation.
+- It is introduced using the `default` keyword.
+- Classes implementing the interface can **use the default implementation** or **override it**.
+
+### **2. Why Default Methods?**
+- **Backward Compatibility:** Add new methods to interfaces without breaking existing implementations.
+- **Avoid Code Duplication:** Provide common behavior for multiple classes implementing the interface.
+
+### **3. Syntax:**
+```java
+interface MyInterface {
+    default void myMethod() {
+        System.out.println("Default implementation");
+    }
+}
+```
+
+### **4. Example:**
+```java
+interface Vehicle {
+    void start(); // Abstract method
+
+    default void stop() { // Default method
+        System.out.println("Vehicle stopped");
+    }
+}
+
+class Car implements Vehicle {
+    public void start() {
+        System.out.println("Car started");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.start(); // Output: Car started
+        car.stop();  // Output: Vehicle stopped (default implementation)
+    }
+}
+```
+
+---
+
+## **Static Methods in Interfaces**
+
+### **1. What is a Static Method?**
+- A **static method** in an interface is a method that is defined with the `static` keyword.
+- It belongs to the interface itself, not its implementations.
+- It cannot be overridden by implementing classes.
+
+### **2. Why Static Methods?**
+- **Utility Methods:** Provide methods that are related to the interface but don’t depend on instance-specific data.
+- **Encapsulation:** Keep helper methods within the interface.
+
+### **3. Syntax:**
+```java
+interface MyInterface {
+    static void myStaticMethod() {
+        System.out.println("Static method implementation");
+    }
+}
+```
+
+### **4. Example:**
+```java
+interface MathOperations {
+    static int add(int a, int b) { // Static method
+        return a + b;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int result = MathOperations.add(5, 3); // Call static method directly
+        System.out.println("Sum: " + result); // Output: Sum: 8
+    }
+}
+```
+
+---
+
+## **Combining Default and Static Methods**
+
+### **Example:**
+```java
+interface Payment {
+    default void process() {
+        System.out.println("Payment processed");
+    }
+
+    static void printReceipt() {
+        System.out.println("Receipt printed");
+    }
+}
+
+class CreditCardPayment implements Payment {
+    public void process() {
+        System.out.println("Credit card payment processed");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        CreditCardPayment payment = new CreditCardPayment();
+        payment.process(); // Output: Credit card payment processed
+        Payment.printReceipt(); // Output: Receipt printed
+    }
+}
+```
+
+---
+
+## **Key Differences**
+
+| Feature           | Default Method                        | Static Method                          |
+|--------------------|---------------------------------------|----------------------------------------|
+| Keyword            | `default`                            | `static`                               |
+| Access             | Called on instance of implementing class | Called on interface itself             |
+| Overriding         | Can be overridden                    | Cannot be overridden                  |
+| Purpose            | Provide default behavior             | Utility/helper methods                 |
+
+---
+
+### **Why Use Default and Static Methods?**
+1. **Default Methods:**  
+   - Avoid breaking existing implementations when adding new methods.
+   - Provide common behavior across implementing classes.
+
+2. **Static Methods:**  
+   - Organize utility methods within interfaces.
+   - Call methods directly on the interface without creating an instance.
+
+---
+
+These features make interfaces in Java more powerful and flexible, enabling better design patterns like **mixins** and **utility classes**.
+Let me know if you need further examples or clarifications!
