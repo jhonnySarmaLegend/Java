@@ -59,6 +59,8 @@ Changes made by one thread may not be visible to other threads immediately due t
 // 1. Use volatile Keyword:
 
 //The volatile keyword ensures that reads and writes to the variable are always from main memory, making changes visible to all threads.
+//For compound operations (e.g., i++), you need synchronization, as volatile doesn't guarantee atomicity.
+
 private static volatile boolean flag = false;
 
 
