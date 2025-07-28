@@ -93,7 +93,7 @@ If one thread is preempted after the "read" step, another thread may overwrite t
 
 // SOLUTION
 
-//1. Atomic integer
+//1. Atomic Integer
 import java.util.concurrent.atomic.AtomicInteger;
 
 class Counter {
@@ -144,7 +144,7 @@ public class AtomicExample {
 
 
 
-// 2.Synchronization
+// 2.Synchronization - Synchronized Methods
 class Counter {
     private int count = 0;
 
@@ -190,6 +190,60 @@ public class SynchronizedExample {
     }
 }
 
+
+// 2. Synchronization - Synchronized Blocks
+class Counter {
+    private int count = 0;
+    private final Object lock = new Object(); // A custom lock object to synchronize on
+
+    public void increment() {
+        synchronized (lock) { // Synchronizing only the critical section
+            count = count + 1;
+        }
+    }
+
+    public void decrement() {
+        synchronized (lock) { // Synchronizing only the critical section
+            count = count - 1;
+        }
+    }
+
+    public int getCount() {
+        synchronized (lock) { // Synchronizing to ensure consistent read
+            return count;
+        }
+    }
+}
+
+public class SynchronizedBlockExample {
+    public static void main(String[] args) throws InterruptedException {
+        Counter counter = new Counter();
+
+        Runnable incrementTask = () -> {
+            for (int i = 0; i < 1000; i++) {
+                counter.increment();
+            }
+        };
+
+        Runnable decrementTask = () -> {
+            for (int i = 0; i < 1000; i++) {
+                counter.decrement();
+            }
+        };
+
+        Thread t1 = new Thread(incrementTask);
+        Thread t2 = new Thread(decrementTask);
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+
+        // Output the final count
+        System.out.println("Final count: " + counter.getCount()); // Always 0
+    }
+}
 
 
 // 3. Locks
