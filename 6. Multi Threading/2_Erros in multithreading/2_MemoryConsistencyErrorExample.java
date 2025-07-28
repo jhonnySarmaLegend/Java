@@ -106,6 +106,14 @@ public static void main(String[] args) throws InterruptedException {
 // 3. Use Locks (ReentrantLock):
 
 //ReentrantLock provides explicit locking and ensures memory consistency.
+/*
+A powerful alternative to synchronized blocks/methods. 
+It allows for
+more flexible locking mechanisms
+tryLock(), tryLock(long time, TimeUnit unit), and lockInterruptibly()
+and provides additional functionalities such as fairness policies and interruptible lock acquisition.
+
+*/
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
