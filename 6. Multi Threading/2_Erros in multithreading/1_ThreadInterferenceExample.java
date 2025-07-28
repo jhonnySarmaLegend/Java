@@ -11,6 +11,14 @@ incorrect results when the preempted thread resumes.
 
 Non-Atomic Operations: Compound actions like value = value + 1 involve multiple steps (reading value, adding 1, writing it back),
 and interference may occur if threads interleave these steps.
+
+operations involved while incrementing a number in instruction level
+
+get count
+temp->count+1
+count=temp
+
+
 */
 
 class Counter {
