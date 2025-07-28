@@ -68,6 +68,8 @@ private static volatile boolean flag = false;
 //2. Use synchronized Methods or Blocks:
 
 //Synchronization ensures mutual exclusion and memory consistency.
+// No ability to try acquiring the lock without blocking.
+
 private static boolean flag = false;
 private static final Object lock = new Object();
 
