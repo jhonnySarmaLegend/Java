@@ -1,4 +1,3 @@
-import java.util.concurrent.Callable;
 /*
 Overview
 
@@ -11,8 +10,7 @@ Return Value: Callable tasks can return a result of a specified type.
 Exception Handling: Can throw checked exceptions.
 Use Case: Ideal for tasks that need to return a result or handle exceptions.
 */
-
-
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
