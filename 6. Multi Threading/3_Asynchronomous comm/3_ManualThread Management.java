@@ -4,6 +4,26 @@ In manual thread management, you create and manage threads explicitly without us
 Here’s how you could rewrite the above example using manual thread management
 */
 
+class FileProcessor implements Runnable {
+    private String fileName;
+
+    public FileProcessor(String fileName) {
+        this.fileName = fileName;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Processing file: " + fileName + " on thread: " + Thread.currentThread().getName());
+        try {
+            Thread.sleep(2000); // Simulate file processing time
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Completed processing file: " + fileName);
+    }
+}
+
+
 public class FileProcessingExampleManualThreads {
     public static void main(String[] args) {
         // Simulate a list of files to process
