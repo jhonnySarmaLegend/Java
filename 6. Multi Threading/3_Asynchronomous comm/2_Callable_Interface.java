@@ -10,6 +10,7 @@ Return Value: Callable tasks can return a result of a specified type.
 Exception Handling: Can throw checked exceptions.
 Use Case: Ideal for tasks that need to return a result or handle exceptions.
 */
+
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -41,3 +42,27 @@ public class CallableExample {
         executor.shutdown();
     }
 }
+
+
+/*
+When to Use Which?
+
+Use Runnable:
+For tasks that perform operations without returning a result.
+When you don’t need to handle checked exceptions.
+
+Use Callable:
+For tasks that need to return a result.
+When you need to handle checked exceptions.
+
+
+Real-World Use Cases
+
+Runnable
+Performing background tasks like logging, monitoring, or cleanup operations.
+Updating the UI in Swing or JavaFX applications.
+
+Callable
+Fetching data from a database or an external API.
+Performing computations that return a result, such as calculating the sum of a large dataset.
+*/
