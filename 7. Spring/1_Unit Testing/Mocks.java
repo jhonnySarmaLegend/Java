@@ -1,3 +1,4 @@
+//  We are using -->  MOCKITO FRAMEWORK   other --> Easymock , JMock , PowerMock
 /*
 Mocks in Java are objects that simulate the behavior of real objects in a controlled way. They are commonly used in unit testing
 to isolate the code under test from its dependencies. Mocking frameworks like Mockito simplify the creation and usage of mocks.
