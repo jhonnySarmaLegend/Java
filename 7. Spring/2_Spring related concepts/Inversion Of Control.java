@@ -38,7 +38,7 @@ Hard to unit-test in isolation.
 
 
 
-
+// CONSTRUCTOR INJECTION
 //2. With IoC (Spring-Managed Beans)
 
 
@@ -89,6 +89,72 @@ public class MainApp {
 
         // 3. Use it
         svc.sendNotification("Hello, IoC World!");
+
+        ctx.close();
+    }
+}
+
+
+//Swapping implementation
+@Component
+public class SMSService implements MessageService {
+    @Override
+    public void sendMessage(String message) {
+        System.out.println("SMS sent: " + message);
+    }
+}
+
+/*
+Without IoC: Classes manage and instantiate their own dependencies → tight coupling.
+With IoC: A container creates and injects dependencies → loose coupling, flexibility, testability.
+*/
+
+
+
+
+
+// SETTER INJECTION
+// 1. Service Interface
+public interface MessageService {
+    void sendMessage(String message);
+}
+
+// 2. Implementation
+@Component
+public class EmailService implements MessageService {
+    @Override
+    public void sendMessage(String message) {
+        System.out.println("Email sent: " + message);
+    }
+}
+
+// 3. Consumer with Setter Injection
+@Component
+public class NotificationService {
+    private MessageService messageService;
+
+    @Autowired
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    public void sendNotification(String message) {
+        messageService.sendMessage(message);
+    }
+}
+
+// 4. Configuration & Bootstrap
+@Configuration
+@ComponentScan("com.example")
+public class AppConfig { }
+
+public class MainApp {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext ctx =
+            new AnnotationConfigApplicationContext(AppConfig.class);
+
+        NotificationService svc = ctx.getBean(NotificationService.class);
+        svc.sendNotification("Hello, Setter-injected World!");
 
         ctx.close();
     }
