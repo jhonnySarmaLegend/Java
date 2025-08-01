@@ -1,4 +1,4 @@
-# All in one Spring 
+# All in one Spring Framework
 
 https://www.geeksforgeeks.org/advance-java/spring/
 
