@@ -4,6 +4,6 @@ https://www.geeksforgeeks.org/advance-java/spring/
 
 
 
-# Intv Ques
+# Intv Questions
 
 https://www.geeksforgeeks.org/springboot/spring-boot-interview-questions-and-answers/
