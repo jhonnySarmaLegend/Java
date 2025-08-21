@@ -8,6 +8,9 @@
 https://www.geeksforgeeks.org/advance-java/spring/
 
 
+# Spring DATA JPA
+### https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
+
 
 # Intv Questions
 
