@@ -158,4 +158,206 @@ Please follow existing code style, include tests, and update this README with an
 
 ---
 
+
+
+
+# Snakes & Ladders Game
+
+An implementation of the classic Snakes & Ladders board game in Java, designed with modularity, robustness, and scalability in mind. This project focuses on handling edge cases gracefully and provides a foundation for extending the game with new features.
+
+---
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Features](#features)
+3. [Edge Cases & Solutions](#edge-cases--solutions)
+4. [Getting Started](#getting-started)
+5. [Project Structure](#project-structure)
+6. [Extending the Game](#extending-the-game)
+7. [Contributing](#contributing)
+8. [License](#license)
+
+---
+
+## Overview
+
+This project simulates the Snakes & Ladders game, where players roll dice to advance along a board, climb ladders, and avoid snakes. The first player to land exactly on the final square wins.
+
+---
+
+## Features
+
+- **Modular Code**: Separate packages for models, board logic, and game flow.
+- **Configurable Board**: Supports custom board sizes, snakes, and ladders.
+- **Player Management**: Handles duplicate player names using unique identifiers.
+- **Edge Case Handling**: Gracefully manages invalid dice rolls, snake/ladder loops, and more.
+- **Extensible Design**: Easily add features like multiple dice, custom rules, or persistence.
+
+---
+
+## Edge Cases & Solutions
+
+### 1. **Player Name Collisions**
+
+**Problem**: Two players with the same name join the game.  
+**Solution**: Assign each player a unique identifier (UUID) and display it alongside their name.
+this.id = UUID.randomUUID().toString();
+
+```java
+Player alice1 = new Player("Alice"); // Alice [f47ac10b]
+Player alice2 = new Player("Alice"); // Alice [9c0a4f37]
+```
+
+---
+
+### 2. **Board Size & Customization**
+
+**Problem**: The board size or snake/ladder configuration may vary.  
+**Solution**: Initialize `GameBoard` with customizable parameters.
+
+```java
+GameBoard board = new GameBoard(100, List.of(
+    new Jumper(16, 8), new Jumper(98, 13)
+), List.of(
+    new Jumper(3, 22), new Jumper(36, 89)
+));
+```
+
+---
+
+### 3. **Invalid Dice Rolls**
+
+**Problem**: Rolls may exceed the board size.  
+**Solution**: Skip the turn if `currentPosition + diceValue > boardSize`.
+
+```java
+if (currentPosition + diceValue > boardSize) {
+    System.out.println("Cannot move—need exact roll to finish.");
+    turnQueue.offer(player);
+    continue;
+}
+```
+
+---
+
+### 4. **Snake/Ladder Loops**
+
+**Problem**: Ladders or snakes create infinite loops.  
+**Solution**: Validate jumpers during board initialization.
+
+```java
+public void validateJumpers() {
+    for (Jumper jumper : jumpers) {
+        if (jumper.getStart() == jumper.getEnd()) {
+            throw new IllegalArgumentException("Invalid jumper: start == end.");
+        }
+    }
+}
+```
+
+---
+
+### 5. **Multiple Dice**
+
+**Problem**: Players may want to roll multiple dice.  
+**Solution**: Add `numberOfDice` as a parameter to `Dice`.
+
+```java
+public int roll() {
+    int sum = 0;
+    for (int i = 0; i < numberOfDice; i++) {
+        sum += rand.nextInt(6) + 1;
+    }
+    return sum;
+}
+```
+
+---
+
+### 6. **Winning Conditions**
+
+**Problem**: Multiple players may land on the final cell simultaneously.  
+**Solution**: Declare the first player to land exactly on `boardSize` as the winner.
+
+```java
+if (tentative == finalCell) {
+    System.out.printf("%s reaches %d and wins! 🎉%n", player.getDisplayName(), finalCell);
+    return;
+}
+```
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Java Development Kit (JDK) 8 or higher  
+- Apache Maven or any build tool of your choice  
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/snakesandladders.git
+cd snakesandladders
+
+# Build with Maven
+mvn clean package
+```
+
+### Running the Game
+
+```bash
+# Using Maven
+mvn exec:java -Dexec.mainClass="com.snakesandladders.app.Main"
+
+# Or manually
+java -cp out com.snakesandladders.app.Main
+```
+
+---
+
+## Project Structure
+
+```
+src/
+└── com/snakesandladders
+    ├── app
+    │   └── Main.java
+    ├── model
+    │   ├── Player.java
+    │   ├── Dice.java
+    │   └── Jumper.java
+    ├── board
+    │   └── GameBoard.java
+    └── service
+        └── GameEngine.java
+```
+
+---
+
+## Extending the Game
+
+1. **Add More Players**: Call `engine.addPlayer(new Player("Name"))`.  
+2. **Custom Board Size**: Use `GameBoard(boardSize, snakes, ladders)`.  
+3. **Multiple Dice**: Instantiate `new Dice(numberOfDice)`.  
+4. **Save/Restore Game**: Serialize game state to JSON or a file.  
+
+---
+
+## Contributing
+
+1. Fork the repository.  
+2. Create a feature branch.  
+3. Commit your changes.  
+4. Push to your branch.  
+5. Open a Pull Request.  
+
+Please follow existing code style, include tests, and update this README with any new features.
+
+
+**Enjoy the game, and happy coding!** 🚀
+
 **Enjoy the game, and happy coding!**
