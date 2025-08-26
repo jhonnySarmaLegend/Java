@@ -26,6 +26,12 @@ public class GameEngine {
     public void start() {
         int finalCell = board.getSize();
         while (turnQueue.size() > 1) {
+            /*
+               Difference from remove():
+
+                 poll() returns null if the queue is empty.
+                 remove() throws a NoSuchElementException if the queue is empty.
+            */
             Player p = turnQueue.poll();
             int roll = dice.roll();
             System.out.printf("%s rolls %d…%n", p.getName(), roll);
