@@ -19,6 +19,13 @@ public class GameEngine {
 
     /** Add players in turn order */
     public void addPlayer(Player player) {
+        /*
+        Difference from add():
+
+           offer() returns false if the element cannot be added (e.g., in a bounded queue that's full).
+           add() throws an IllegalStateException if the element cannot be added.
+
+        */
         turnQueue.offer(player);
     }
 
