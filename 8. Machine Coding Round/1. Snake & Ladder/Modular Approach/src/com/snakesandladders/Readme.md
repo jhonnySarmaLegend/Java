@@ -155,11 +155,6 @@ src/
 
 Please follow existing code style, include tests, and update this README with any new features.
 
----
-
-## 8. License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ---
 
