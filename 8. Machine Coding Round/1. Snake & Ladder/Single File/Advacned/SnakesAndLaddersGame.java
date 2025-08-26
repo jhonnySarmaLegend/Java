@@ -1,3 +1,6 @@
+// Copy paste in chatgpt for explaination and in online compiler for running
+
+
 // SnakesAndLaddersGame.java
 
 import java.util.Arrays;
