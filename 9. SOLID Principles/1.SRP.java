@@ -8,7 +8,7 @@ Every class/module should focus on a single part of the functionality.
 
 */
 
-// BAD CODE
+//Bad: Everything in one class
 public class NotificationService {
     // 1) Formats the notification
     private String format(Notification n) {
@@ -33,7 +33,7 @@ public class NotificationService {
 
 
 
-//  GOOD CODE
+//   Good: One class, one job
 // Formats messages only
 class HtmlFormatter implements IMessageFormatter {
     public String format(Notification n) {
