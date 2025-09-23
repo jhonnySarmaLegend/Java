@@ -1,3 +1,62 @@
+//SOrting string
+import java.util.*;
+
+public class StringBuilderInPlaceSort {
+
+    // Method to sort StringBuilder in ascending order using Collections
+    public static void sortInPlaceAscending(StringBuilder sb) {
+        // Convert StringBuilder to a List of Characters
+        List<Character> charList = new ArrayList<>();
+        for (int i = 0; i < sb.length(); i++) {
+            charList.add(sb.charAt(i));
+        }
+
+        // Sort the list
+        Collections.sort(charList);
+
+        // Clear StringBuilder and append sorted characters back
+        sb.setLength(0); // Clear the StringBuilder
+        for (Character c : charList) {
+            sb.append(c);
+        }
+    }
+
+    // Method to sort StringBuilder in descending order using Collections
+    public static void sortInPlaceDescending(StringBuilder sb) {
+        // Convert StringBuilder to a List of Characters
+        List<Character> charList = new ArrayList<>();
+        for (int i = 0; i < sb.length(); i++) {
+            charList.add(sb.charAt(i));
+        }
+
+        // Sort the list in reverse order
+        Collections.sort(charList, Collections.reverseOrder());
+
+        // Clear StringBuilder and append sorted characters back
+        sb.setLength(0); // Clear the StringBuilder
+        for (Character c : charList) {
+            sb.append(c);
+        }
+    }
+
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder("dcba");
+
+        // Sort in ascending order
+        sortInPlaceAscending(sb);
+        System.out.println("Sorted Ascending: " + sb); // Output: abcd
+
+        // For descending sort, we can create a new StringBuilder instance
+        sb = new StringBuilder("dcba");
+        sortInPlaceDescending(sb);
+        System.out.println("Sorted Descending: " + sb); // Output: dcba
+    }
+}
+
+
+
+
+
 // Reverse word 
     public String reverseWord(String word) {
         // Handle null input gracefully
