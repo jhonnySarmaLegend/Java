@@ -1,3 +1,19 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        String[] arr = {"banana", "apple", "cherry"}; // Example array
+        // Convert the array to a List
+        List<String> list = new ArrayList<>(Arrays.asList(arr));
+        // Sort the list in descending order
+        Collections.sort(list, Collections.reverseOrder());
+        // Print the sorted list
+        System.out.println(list); // Output: [cherry, banana, apple]
+    }
+}
+
+
+// Stringbuilder isn't a Collection
+
 //SOrting string
 import java.util.*;
 
