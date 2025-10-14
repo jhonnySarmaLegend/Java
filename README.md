@@ -5,4 +5,10 @@
 
 
 ## HLD -->
-https://www.hellointerview.com/practice
+
+
+1. Y.T. --> https://www.youtube.com/@hello_interview
+   Website --> https://www.hellointerview.com/practice
+
+2. Y.T. --> https://www.youtube.com/@ByteByteGo
+   BOOK 1 & 2 --> System Design Interview
